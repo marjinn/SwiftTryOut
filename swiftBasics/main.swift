@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 println("Hello, World!")
 
 /*************/
@@ -223,7 +224,7 @@ println("addressNumber \(addressNumber)");
 
 
 
-class UrlCon
+class UrlCon:NSObject,NSURLConnectionDelegate,NSURLConnectionDataDelegate
 {
     
     func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!)
@@ -315,9 +316,14 @@ if(url != nil)
         var urlConnection:NSURLConnection;
         urlConnection = NSURLConnection(request: url_Request!, delegate: urlCon );
         
-        
-         NSURLConnection.sendAsynchronousRequest(urlRequest!, queue: NSOperationQueue.mainQueue(), completionHandler:closureForUrlConnection);
+        //ASynchronous request with closure - working
+        // NSURLConnection.sendAsynchronousRequest(urlRequest!, queue: NSOperationQueue.mainQueue(), completionHandler:closureForUrlConnection);
        
+    
+        //Synchronous request with delegate - working
+        //URLConnectionDelegate();
+        
+    
        NSRunLoop.currentRunLoop().runUntilDate(
         NSDate(timeInterval: 10.0, sinceDate: NSDate()))
         
