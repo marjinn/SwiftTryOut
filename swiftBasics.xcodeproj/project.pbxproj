@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		159454F81944D12500664C27 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159454F71944D12500664C27 /* main.swift */; };
+		15D6F58B1947B4EC007F3B1A /* UrlConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D6F58A1947B4EC007F3B1A /* UrlConnectionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		159454F41944D12500664C27 /* swiftBasics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftBasics; sourceTree = BUILT_PRODUCTS_DIR; };
 		159454F71944D12500664C27 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		15D6F58A1947B4EC007F3B1A /* UrlConnectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlConnectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				159454F71944D12500664C27 /* main.swift */,
+				15D6F58A1947B4EC007F3B1A /* UrlConnectionDelegate.swift */,
 			);
 			path = swiftBasics;
 			sourceTree = "<group>";
@@ -69,9 +72,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 159454FB1944D12500664C27 /* Build configuration list for PBXNativeTarget "swiftBasics" */;
 			buildPhases = (
-				159454F01944D12500664C27 /* Sources */,
 				159454F11944D12500664C27 /* Frameworks */,
 				159454F21944D12500664C27 /* CopyFiles */,
+				159454F01944D12500664C27 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -118,6 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15D6F58B1947B4EC007F3B1A /* UrlConnectionDelegate.swift in Sources */,
 				159454F81944D12500664C27 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +237,7 @@
 				159454FD1944D12500664C27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
