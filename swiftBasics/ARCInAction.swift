@@ -38,7 +38,7 @@ extension Apartment_MethodCall
 
 
 
-class Person
+class Person___
 {
     let name:String;
     
@@ -57,7 +57,7 @@ class Person
     }
 }
 
-typealias PersonMethodCall = Person;
+typealias PersonMethodCall = Person___;
 
 extension PersonMethodCall
 {
@@ -66,10 +66,88 @@ extension PersonMethodCall
 
 
 
+/*****************************************************/
+/************** Unowned References  **************/
+/*****************************************************/
 
 
 
+class Customer
+{
+    
+    let name: String;
+    var card: CreditCard?
+    
+    init(name:String)
+    {
+        self.name = name;
+        return;
+    }
+    
+    deinit
+    {
+        println("\(self.name) is being deinitialized");
+    }
+    
+}
 
+typealias CustomerMethodCalls = Customer;
+
+extension CustomerMethodCalls
+{
+    
+}
+
+
+import Foundation
+
+class CreditCard
+{
+    let number:Int;
+    unowned let customer:Customer
+    //__unsafe_unretained like reference to break retain cycle
+    //could use weak also
+    
+    init(number:Int, customer:Customer)
+    {
+        self.number = number;
+        self.customer = customer;
+        
+        return;
+    }
+    
+    deinit
+    {
+        println("Card# \(self.number) is being deinitialized");
+    }
+    
+}
+
+typealias CreditCardMethodCalls = CreditCard;
+
+extension CreditCardMethodCalls
+{
+   
+    
+}
+
+func callCustomer(Void) -> Void
+{
+    var john: Customer? = nil;
+    john = Customer(name: "John Appleseed");
+    
+    john!.card
+        = CreditCard(number:1234_5678_9012_3456, customer: john!);
+    
+    john = nil;
+    
+    return;
+}
+
+
+/*****************************************************/
+/**************                         **************/
+/*****************************************************/
 
 class ARCInAction
 {

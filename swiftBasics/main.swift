@@ -33,9 +33,13 @@ else
     println("\"(optionalNumber!)\"")
 }
 
-//################################
-//Function
-//###############################
+//Convert string to int
+let stringVar:String = "6";
+println("\(stringVar.toInt())");
+
+//######################################
+//Function - returning an optional type
+//######################################
 func findIndexOfString(string:String, array:String[]) -> Int?
 {
     for (index:Int,value:String) in enumerate(array)
@@ -59,7 +63,7 @@ let index:Int? = findIndexOfString("Madison", neighbours);
 //check for nil
 if (index != nil)
 {
-    println("Hello , \(neighbours[index!])");
+    println("Hello , \(neighbours[index!])");//force unwrapping with "!"
    
     /*
     println("Hello , \(neighbours[8])");
@@ -90,7 +94,7 @@ else
 /* Optional binding */
 /********************/
 // uses the "if let" operator - tests and unwraps
-// the variable used after "if let" is not of optional type
+// the variable used after "if let" is non-optional type
 // also you cannot have "if let" in parantheses
 // You dont have to force unwrap using unwrap (!) opeartor
 
@@ -170,8 +174,10 @@ println("paul.residence.address.streetName \n \(paul.residence.address.streetNam
 println("paul.residence.address.appartmentNumber \n \(paul.residence.address.appartmentNumber)"  );
 
 
-
+/********************************************/
 /****** Class With Optionla Properties *//////
+/********************************************/
+
 class OtherPerson
 {
     var residence:OtherResidence?;
@@ -218,19 +224,309 @@ if let home:OtherResidence = otherPaul.residence
     }
 }
 
+/********************************************/
 /**** OPTIONAL CHAINING *****/
+/********************************************/
 addressNumber = otherPaul.residence?.otheraddress?.buildingNumber?.toInt()
-println("addressNumber \(addressNumber)");
+println("addressNumber \(addressNumber!)");
 
 
+/************************************************/
+/* Synchronous request with delegate - working  */
+/************************************************/
+//URLConnectionDelegate();
 
-//Synchronous request with delegate - working
-URLConnectionDelegate();
-
+/********************************************/
 //Closure Demo
-ClosureAllKinds();
+/********************************************/
+//ClosureAllKinds();
 
 
 
+/********************************************/
+//MEMORY MANAGEMENT - ARC
+/********************************************/
+class BowlingPin{}
 
+func juggle(count:Int) -> Void
+{
+    var left:BowlingPin = BowlingPin();
     
+    if(count > 1)
+    {
+        var right:BowlingPin = BowlingPin();
+        
+        right = left;
+    
+    }//RIGHT GOES OUT OF SCOPE
+
+}//LEFT GOES OUT OF SCOPE
+
+/*
+left      right
+  |         |
+  |         |
+  |         |
+|-------------|
+| BOWLING PIN |
+|-------------|
+ */
+
+
+/********************************************/
+ //WEAK REFERENCES
+/********************************************/
+class ApartMent
+{
+    var tenant:PerSon?;
+}
+
+class PerSon
+{
+    var home:ApartMent?;
+    
+    func monIn(apt:ApartMent) -> Void
+    {
+        self.home = apt;
+        apt.tenant =  self;
+        
+    }//monIn
+
+}//PerSon
+
+
+var renters:Dictionary<String,PerSon> ;
+renters = ["Elsvette":PerSon()];
+
+var apts:Dictionary<Int,ApartMent>;
+apts = [507: ApartMent()];
+
+renters["Elsvette"]!.monIn(apts[507]!);
+//We use "!" or force unwrapping beacuse dictionary subscripting returns optional type
+
+renters["Elsvette"] = nil;
+
+//still first PerSon isntance will not be deallocated as apts dict still has ApartMent instance which holds on to that
+
+apts[507] = nil;
+//PerSon instance holds on with  strong reference to ApartMent as it is still not deallocated
+
+//Hence we have a strong reference cycle
+//---------------------------------------
+
+//to break this
+
+class ApartMenT
+{
+    weak var tenant:PerSoN?;
+}
+
+class PerSoN
+{
+    weak var home:ApartMenT?;
+    
+    func monIn(apt:ApartMenT) -> Void
+    {
+        self.home = apt;
+        apt.tenant =  self;
+        
+    }//monIn
+    
+}//PerSon
+
+
+var renters_:Dictionary<String,PerSoN> ;
+renters_ = ["Elsvette":PerSoN()];
+
+var apts_:Dictionary<Int,ApartMenT>;
+apts_ = [507: ApartMenT()];
+
+renters_["Elsvette"]!.monIn(apts_[507]!);
+
+//WE get a clean break
+
+renters_["Elsvette"] = nil;
+apts_[507] = nil;
+
+//WEAK references are optional values
+//BINDING the optional produces a strong reference
+
+//TESTING a weak reference(simple if)alone does not prduce a strong reference
+//Chaining doesn't preserve a strong reference b/w method invocations
+
+
+/********************************************/
+//UNOWNED REFERENCES - will not be set to nil
+/********************************************/
+/*
+WEAK REFERENCES MUST ALWAYS BE OPTIONAL TYPES
+IF WE ARE NOT USING AN OPTIONAL TYPE
+TO BREAK RETAIN CYCLES WE CCOULD USE UNOWNED
+*/
+class Individual
+{
+    var card:CreditCarD?;
+    
+    func saveCard(Void) -> Void
+    {
+        return;
+    }
+}
+
+class CreditCarD
+{
+    unowned let holder:Individual;//immutable reference
+    
+    init(cardHolder:Individual)
+    {
+        self.holder = cardHolder;
+    }
+}
+
+var renters__:Dictionary<String,Individual> ;
+renters__ = ["Elsvette":Individual()];
+
+renters__["Elsvette"]!.saveCard();
+renters__["Elsvette"] = nil;
+
+/********************************************/
+//INITIALIZATIONS
+/********************************************/
+//EVERY VALUE MUST BE INITIAZED BEFORE USE
+
+var message:String;
+//No default initialization except for optional whcih are set to "nil"
+
+if ("YES")
+{
+    message = "YES";
+}
+else
+{
+    message = "NO";
+}
+
+println(message);
+//IF Else condition is not specified
+//You get "variable used before being initiliazed" error
+
+//#1  init(...){}
+
+/********************************************/
+//STRUCTURE
+/********************************************/
+
+struct Color
+{
+    //Default values can be provided here as well
+    let red:Double;
+    let green:Double;
+    let blue:Double;
+    
+    //Func that edits the array
+    mutating func validateColor(Void) -> Void
+    {
+        return;
+    }
+    
+    init(grayScale:Double)
+    {
+        red = grayScale;
+        green = grayScale;
+        
+        //if validateColor() is called here
+        //you get self.blue is passed by reference before being initialized
+        //that means all initializatiosn should happen before calling any method
+        //self.validateColor();
+        blue = grayScale;
+        
+        self.validateColor();
+    }
+}
+
+
+//DEFAULT MEMBER_WISE INITIALIZER - provided if no initializer is provided
+//let magenta = Color(red:1.0,green:1.0,blue:1.0);
+
+//DEFAULT INITIALIZER WITH NO INPUT PARAMETERS
+//let Yellow:Color = Color();
+
+/********************************************/
+//CLASS
+/********************************************/
+
+class Car
+{
+    var paintColor:Color;
+    
+    init(color:Color)
+    {
+        self.paintColor = color;
+    }
+    
+    //func
+    func fillGasTank(Void) -> Void
+    {
+        return;
+    }
+}
+
+/********************************************/
+//SUBCLASS
+/********************************************/
+
+class RaceCar:Car
+{
+    var hasTurbo:Bool;
+    
+    override func fillGasTank(Void) -> Void
+    {
+        super.fillGasTank();
+        return;
+    }
+
+    //DESIGNATED INITIALIZER
+    init(color: Color,turbo:Bool)
+    {
+        self.hasTurbo = turbo;
+        //UNLIKE OBJC SUPER init IS CALLED AFTER
+        //ALL CUSTOM INITIALIZATIONS OF THE SUBCLASS
+        super.init(color: color);
+        
+        
+    }
+    
+    //CONVENIENCE INITIALIZER - calls designated initilizer
+    convenience init(color:Color)
+    {
+        self.init(color:color,turbo: true);
+    }
+    
+    //calls the other convenience
+    convenience init()
+    {
+        self.init(color:Color(grayScale: 0.4));
+    }
+    
+}
+
+
+//CONVENIENCE INITIALIZER - INheritance
+
+
+class FormulaOne: RaceCar
+{
+    let minimumWeight:Int = 642;
+    
+    //ALL INITS(convenience and designated) WILL BE INHRITED FROM SUPERCLASS
+    //If we specify our 
+    //OWN CUSTOM INIT IN THE SUB CLASS NO INITS WILL BE INHERITeD
+    init(color: Color)
+    {
+        super.init(color: color, turbo: false);
+    }
+}
+
+/********************************************/
+//LAZY PROPERTIES
+/********************************************/
