@@ -11,6 +11,7 @@
 		150DB8E51948C45000B1FC52 /* ARCInAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB8E41948C45000B1FC52 /* ARCInAction.swift */; };
 		159454F81944D12500664C27 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159454F71944D12500664C27 /* main.swift */; };
 		15A29F1E194D82A500669547 /* PatternMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A29F1D194D82A500669547 /* PatternMatching.swift */; };
+		15A29F20194DF1D700669547 /* AdvancedSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A29F1F194DF1D200669547 /* AdvancedSwift.swift */; };
 		15C1A58C194CF78800BDED6B /* SWIFT_DEFINITIONS_COPY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C1A58B194CF78800BDED6B /* SWIFT_DEFINITIONS_COPY.swift */; };
 		15C973F31948BCFE004DA195 /* JunkYard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C973F21948BCFE004DA195 /* JunkYard.swift */; };
 		15D6F58B1947B4EC007F3B1A /* UrlConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D6F58A1947B4EC007F3B1A /* UrlConnectionDelegate.swift */; };
@@ -34,6 +35,7 @@
 		159454F41944D12500664C27 /* swiftBasics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftBasics; sourceTree = BUILT_PRODUCTS_DIR; };
 		159454F71944D12500664C27 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		15A29F1D194D82A500669547 /* PatternMatching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternMatching.swift; sourceTree = "<group>"; };
+		15A29F1F194DF1D200669547 /* AdvancedSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedSwift.swift; sourceTree = "<group>"; };
 		15C1A58B194CF78800BDED6B /* SWIFT_DEFINITIONS_COPY.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWIFT_DEFINITIONS_COPY.swift; sourceTree = "<group>"; };
 		15C973F21948BCFE004DA195 /* JunkYard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JunkYard.swift; sourceTree = "<group>"; };
 		15D6F58A1947B4EC007F3B1A /* UrlConnectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlConnectionDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				150DB8E41948C45000B1FC52 /* ARCInAction.swift */,
 				15C1A58B194CF78800BDED6B /* SWIFT_DEFINITIONS_COPY.swift */,
 				15A29F1D194D82A500669547 /* PatternMatching.swift */,
+				15A29F1F194DF1D200669547 /* AdvancedSwift.swift */,
 			);
 			path = swiftBasics;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15D6F58B1947B4EC007F3B1A /* UrlConnectionDelegate.swift in Sources */,
+				15A29F20194DF1D700669547 /* AdvancedSwift.swift in Sources */,
 				15C973F31948BCFE004DA195 /* JunkYard.swift in Sources */,
 				159454F81944D12500664C27 /* main.swift in Sources */,
 				150DB8E51948C45000B1FC52 /* ARCInAction.swift in Sources */,

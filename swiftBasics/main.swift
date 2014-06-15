@@ -442,6 +442,13 @@ struct Color
         
         self.validateColor();
     }
+    
+    //Dummy Function Added for use in AdvancedSwift File
+    func rgba(Void) -> (Int,Int,Int,Int)
+    {
+        let tuple:(Int,Int,Int,Int) = (1, 1, 1, 1);
+        return tuple;
+    }
 }
 
 
