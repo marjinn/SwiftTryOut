@@ -255,12 +255,16 @@ func an (object: Thing) -> String
     return object.nameWithArtile;
 }
 
+//func to test operator overloading
 func lawD(Void) -> Void
 {
     let object:Thing = Thing("2014");
     println("You aren't \(an ~ object)")
 }
 
+/*************************************/
+//@@@@@@@@@@@ SUBSCRIPT " @@@@@@@@@@@@
+/*************************************/
 enum Direction
 {
     case North,South,East,West
@@ -288,6 +292,70 @@ class Place:Thing
     
     
 }
+
+//@@@@@@@@@@@ SUBSCRIPT " @@@@@@@@@@@@
+
+extension Place
+    {
+    //You taken in
+    //Assume subscript to be  afunction
+    //that takes in a parameter of the type that
+    //goes inside the subscript [] square braces
+    // and an optional return value of type that the
+    // normal subscripting would return
+    // You then write getter and setter
+    // getter - performs the same operation as would have been performed
+    //           without subscripting
+    //           noraml subscripting would have happened on a var of type say
+    //           Dictionary
+    //           inside the getter we would acces the elemenst in the dictionary 
+    //           by subscript method which is part of Dictionary type
+    // What basically happens is whatever value is passed on 
+    //between the square braces[] will be passed on as the input parameter of the 
+    // subscript "function"
+    // We perform whatever operation we want on it and can return anything
+    // we want as long as it's type is specified as the type of the return value 
+    // of the subscript "function"
+    //this return value should be the same as that of the opeartion 
+    //without subscripting
+    subscript(direction:Direction) -> Place?
+        {
+        get
+        {
+            return exists[direction];
+        }
+        set(destination)
+        {
+            exists[direction] = destination;
+        }
+    }
+}
+
+
+
+func toCallPlace(Void) -> Void
+{
+    let westOfHouse:Place   = Place("West","Further up");
+    
+    let gardenPath:Place    = Place("Garden Path","Further up");
+    
+    let forest:Place        = Place("Forest","Further up");
+
+    westOfHouse.exists[Direction.South] = gardenPath;
+    
+    gardenPath.exists[Direction.North]  = westOfHouse;
+
+    gardenPath.exists[Direction.East]  = forest;
+    
+    //TO AVOID WRITING EXISTS we subscript
+    //TO GET THE FOLLWING
+    westOfHouse[Direction.South] = gardenPath;
+    
+    gardenPath[Direction.North]  = westOfHouse;
+    
+    gardenPath[Direction.East]  = forest;
+}
+
 
 /**************************************************/
 //GENERICS - From The Ground UP
