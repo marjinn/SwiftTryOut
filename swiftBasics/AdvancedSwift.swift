@@ -39,7 +39,7 @@ class Thing
     init(#location:Thing?,#name:String, #longDescription:String)
     {
         self.name = name;
-        self.longDescription = longDescription; 
+        self.longDescription = longDescription;
         return;
     }
 
@@ -224,7 +224,12 @@ extension Thing: Printable
 /*******************************/
 extension Thing
 {
-     var nameWithArtile: String
+    convenience init(_ name:String)
+    {
+        self.init(location:nil,name:name,longDescription:"Go00");
+    }
+    
+    var nameWithArtile: String
     {
     get
     {
@@ -252,8 +257,8 @@ func an (object: Thing) -> String
 
 func lawD(Void) -> Void
 {
-//    let object:Thing = Thing("Thing()","14","2014");
-//    println("You aren't \(an ~ object)")
+    let object:Thing = Thing("2014");
+    println("You aren't \(an ~ object)")
 }
 
 enum Direction
