@@ -7,9 +7,17 @@
 //
 
 import Foundation
+import CoreFoundation
 
 class UrlCon:NSObject,NSURLConnectionDelegate,NSURLConnectionDataDelegate
 {
+//    
+//    let coreF:CFStringRef;
+//    
+//    init(withcoref:CFStringRef)
+//    {
+//        self.coreF = withcoref;
+//    }
     
     func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!)
     {

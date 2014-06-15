@@ -529,4 +529,101 @@ class FormulaOne: RaceCar
 
 /********************************************/
 //LAZY PROPERTIES
+
+//properties which are initilaized only when they are necessary
+//@lazy key word We can delay thye initilaization if its appropriate
+//ie it will be accessed when it is created and that one time alone
 /********************************************/
+class Player
+{
+    let count:UnsignedInteger ;
+    
+    init(count:UnsignedInteger)
+    {
+        self.count = count;
+    }
+}
+
+class MutiPlayerManager
+{
+    func addPlayer(player:Player) -> Void
+    {
+        return;
+    }
+}
+
+class Game
+{
+    ///It makes sense as we need to initialize it when we need it
+    // if we do not make use of it in a particular instance of our class
+    // we do not need to create an instance of it
+    @lazy var multiPlayerManager = MutiPlayerManager();
+    
+    var singlePlayer: Player?;
+    
+    func beginGameWithPlayers(players:Player[])
+    {
+        if (players.count == 1)
+        {
+            self.singlePlayer = players[0];
+        }
+        else
+        {
+            for  player:Player in players
+            {
+                self.multiPlayerManager.addPlayer(player);
+            }
+        }
+    }
+    
+    
+}
+
+
+/********************************************/
+//DEINITIALIZATION
+/********************************************/
+
+//Dummy code to alleviate compiler error - 
+//This can be better expressed with NSFileHandle
+//Will be including a file handling Example later
+typealias FileDescriptor = Int;
+
+func openFile(filePath: String) -> FileDescriptor
+{
+    return 0;
+}
+
+func closeFile(filePath: String) -> FileDescriptor
+{
+    return 0;
+}
+
+class FileHandle
+{
+    let fileDescriptor: FileDescriptor
+    
+    init(path: String)
+    {
+        self.fileDescriptor = openFile(path);
+        return;
+    }
+    
+   
+    
+    deinit
+    {
+        closeFile("");
+        println("\(self) is being deinitialized");
+    }
+    
+}
+
+typealias FileHandleMethodCalls = FileHandle;
+
+extension FileHandleMethodCalls
+{
+    
+}
+
+
