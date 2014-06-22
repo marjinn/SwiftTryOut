@@ -32,6 +32,7 @@
 /* Begin PBXFileReference section */
 		1509320D19487701005EBDDE /* ClosureAllKinds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureAllKinds.swift; sourceTree = "<group>"; };
 		150DB8E41948C45000B1FC52 /* ARCInAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARCInAction.swift; sourceTree = "<group>"; };
+		1548BB3119574BAD00886AA1 /* SwiftTrial.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = SwiftTrial.playground; path = ../../SwiftTrial.playground; sourceTree = "<group>"; };
 		159454F41944D12500664C27 /* swiftBasics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = swiftBasics; sourceTree = BUILT_PRODUCTS_DIR; };
 		159454F71944D12500664C27 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		15A29F1D194D82A500669547 /* PatternMatching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternMatching.swift; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		159454F61944D12500664C27 /* swiftBasics */ = {
 			isa = PBXGroup;
 			children = (
+				1548BB3119574BAD00886AA1 /* SwiftTrial.playground */,
 				159454F71944D12500664C27 /* main.swift */,
 				1509320D19487701005EBDDE /* ClosureAllKinds.swift */,
 				15D6F58A1947B4EC007F3B1A /* UrlConnectionDelegate.swift */,

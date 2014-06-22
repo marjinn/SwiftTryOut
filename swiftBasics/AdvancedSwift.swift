@@ -360,3 +360,123 @@ func toCallPlace(Void) -> Void
 /**************************************************/
 //GENERICS - From The Ground UP
 /**************************************************/
+//T supports a type relation and conserves type information  unlike Any or id
+func swap<T>(inout x: T, inout y: T)
+{
+    let tmp:T = x;
+    x = y;
+    y = tmp;
+}
+
+
+//FINDING STRING N AN ARRAY
+//Retrun first index of sought in aray or nil if not found ,hence return type is optional
+
+func indexOfString(sought: String, inarray array:String[]) ->Int?
+{
+    for i:Int in 0..array.count
+    {
+        if(array[i] == sought)
+        {
+            return i;
+        }
+        
+    }
+    return nil;
+}
+
+//GENERICS VERSION
+//Equatable 
+/*
+protocol Equatable {
+    func ==(lhs: Self, rhs: Self) -> Bool
+}
+*/
+func indexOfString<T:Equatable> (sought: T, inarray array:T[]) ->Int?
+{
+    for i:Int in 0..array.count
+    {
+        //since T is a type that compiler doesnt know
+        //it cannot compute an equality amongst those types
+        //We make T adopt Equatable protocol
+        //So that a type that doesnt adopt equatable protocol cannot be used
+        if(array[i] == sought)
+        {
+            return i;
+        }
+        
+    }
+    return nil;
+}
+
+/***************************/
+//Making and Equatable type
+/****************************/
+struct Temperature: Equatable
+{
+    let value: Int = 0;
+}
+
+//EQUALS
+func ==(lhs: Temperature, rhs: Temperature) -> Bool
+{
+    return lhs.value == rhs.value;
+}
+
+//NOT EQUAL - generic from swift
+/*
+func != <T : Equatable> (lhs: Temperature, rhs: Temperature) -> Bool
+{
+return !(lhs == rhs);
+}
+*/
+func != <T : Equatable> (lhs: Temperature, rhs: Temperature) -> Bool
+{
+    return !(lhs.value == rhs.value);
+}
+
+
+//COMPUTE PHI aka GOLDEN MEAN
+
+//GET nth Fibonacci number : 0,1,1,2,3,5,8,13,21
+func fibonacci(n:Int) -> Double
+{
+    return n < 2 ? Double(n) : fibonacci(n-1) +  fibonacci(n-2);
+}
+
+
+//GOLDEN MEAN
+let phi = fibonacci(45) / fibonacci(45); //Makes 17566 counts
+
+//MEMOIZE this calculation
+var fibonacciMemo:Dictionary<Int,Double> = Dictionary<Int,Double>();
+func memoized_fibonacci(n:Int) -> Double
+{
+    if let result:Double = fibonacciMemo[n] //if let as dictionary subscripting returns optional types
+    {
+        return result;
+    }
+    
+    let result = n < 2 ? Double(n) : fibonacci(n-1) +  fibonacci(n-2);
+    fibonacciMemo[n] = result;
+    
+    return result;
+}
+
+//AUTOMATIC MEMOIZE
+
+func memoize<T: Hashable,U>( body: (T)->U ) -> (T)-> U
+{
+    var memo:Dictionary<T, U> = Dictionary<T, U>();
+    
+    return { (x:T) -> U in
+        
+        if let q:U = memo[x] {return q;}
+        
+        let r:U = body(x);
+        
+        memo[x] = r;
+        
+        return r;
+    }
+}
