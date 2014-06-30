@@ -423,7 +423,7 @@ func ==(lhs: Temperature, rhs: Temperature) -> Bool
     return lhs.value == rhs.value;
 }
 
-//NOT EQUAL - generic from swift
+//NOT EQUAL - generic from swift works for all equatable type
 /*
 func != <T : Equatable> (lhs: Temperature, rhs: Temperature) -> Bool
 {
@@ -469,9 +469,13 @@ func memoize<T: Hashable,U>( body: (T)->U ) -> (T)-> U
 {
     var memo:Dictionary<T, U> = Dictionary<T, U>();
     
-    return { (x:T) -> U in
+    return {
+        (x:T) -> U in
         
-        if let q:U = memo[x] {return q;}
+        if let q:U = memo[x]
+        {
+            return q;
+        }
         
         let r:U = body(x);
         
@@ -480,3 +484,82 @@ func memoize<T: Hashable,U>( body: (T)->U ) -> (T)-> U
         return r;
     }
 }
+
+
+
+//Identity function/closure
+//var factorial: (Int) -> Int = {$0};
+
+
+
+
+//CLosure that returns  aclosure
+func memoizeBreakingItApart<T: Hashable, U>(body: (T)->U ) -> (T) ->U
+{
+    var memo = Dictionary<T,U>();
+    
+    func pluto(bad:T) -> U
+    {
+        //Subcrtipting with if let
+        if let q = memo[bad]
+        {
+            return q;
+        }
+        
+        //unwrapping with optional;
+        let q:U? = memo[bad];
+        
+        if (q)
+        {
+          return q!;
+        }
+        
+        let r:U = body(bad);//invoke
+        
+        memo[bad] = r;
+        
+        return r;
+    }
+    
+    return pluto;
+}
+
+func make(Void) -> Void
+{
+
+//TO MAKE THIS WORK FOR RECURSIVE FUNCTIONS
+
+//variable used withing its own initial value
+//var factorial = memoizeBreakingItApart{x in x == 0 ? 1 : x * factorial(x - 1) }
+
+//TWO STEP INITIALIZATION DANCE
+var factorial:(Int) ->Int = {$0};
+factorial = memoizeBreakingItApart{x in x == 0 ? 1 : x * factorial(x - 1) };
+
+
+}
+
+func memoizeWithInitDance<T: Hashable,U>( body: ( (T) -> U  , T)->U ) -> (T)-> U
+{
+    var memo:Dictionary<T, U> = Dictionary<T, U>();
+    
+    var result : ((T) -> U)!
+    result =  {
+        (x:T) -> U in
+        
+        if let q:U = memo[x]
+        {
+            return q;
+        }
+        
+        let r:U = body(result,x);
+        
+        memo[x] = r;
+        
+        return r;
+    }
+    
+    return result;
+}
+
+
